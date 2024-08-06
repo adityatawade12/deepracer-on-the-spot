@@ -65,7 +65,7 @@ def reward_function(params):
     DIRECTION_THRESHOLD = 10.0
 
     if direction_diff > 20:
-        reward -= 40
+        reward -= 35
     elif direction_diff > 10:
         reward -= 25
     elif direction_diff > 5:
