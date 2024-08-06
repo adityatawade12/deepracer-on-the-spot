@@ -12,16 +12,18 @@ def reward_function(params):
     marker_1 = 0.1 * track_width
     marker_2 = 0.25 * track_width
     marker_3 = 0.5 * track_width
-    
+    reward1 = 0
     # Give higher reward if the car is closer to center line and vice versa
     if distance_from_center <= marker_1:
-        reward = 100
+        reward1 = 1.0
     elif distance_from_center <= marker_2:
-        reward = 60
+        reward1 = 0.6
     elif distance_from_center <= marker_3:
-        reward = 40
+        reward2 = 0.2
     else:
-        reward = 10 
+        reward1 = 0.001
+
+    
 
     #reward in angle
     # Read input variables
@@ -36,7 +38,7 @@ def reward_function(params):
 
     # Initialize the reward with typical value
 
-    # reward = 1.0
+    reward2 = 0
 
     # Calculate the direction of the center line based 
 
@@ -65,11 +67,18 @@ def reward_function(params):
     DIRECTION_THRESHOLD = 10.0
 
     if direction_diff > 20:
-        reward -= 35
+        reward2 = -0.8 
     elif direction_diff > 10:
-        reward -= 25
+        reward2 = -0.5
     elif direction_diff > 5:
-        reward -= 15
+        reward2 = -0.3
+
+    all_wheels_on_track = params['all_wheels_on_track']
+    reward3=-1.0
+    if all_wheels_on_track:
+        reward3=1.0
+
+    reward = 2*(reward1)+reward2+reward3
 
 
     
