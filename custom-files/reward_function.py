@@ -17,11 +17,11 @@ def reward_function(params):
     if distance_from_center <= marker_1:
         reward = 100
     elif distance_from_center <= marker_2:
-        reward = 50
+        reward = 60
     elif distance_from_center <= marker_3:
-        reward = 25
+        reward = 40
     else:
-        reward = 1e-3 
+        reward = 10 
 
     #reward in angle
     # Read input variables
