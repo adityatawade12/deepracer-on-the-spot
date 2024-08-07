@@ -1,90 +1,78 @@
-import mat
+def reward_function(params)
 
- 
 
-def reward_function(params):  
+    
+    # Read input parameters
 
-    #distnce from centre
-    track_width = params['track_width']
     distance_from_center = params['distance_from_center']
-    
-    # Calculate 3 markers that are at varying distances away from the center line
-    marker_1 = 0.1 * track_width
-    marker_2 = 0.25 * track_width
-    marker_3 = 0.5 * track_width
-    reward1 = 0
-    # Give higher reward if the car is closer to center line and vice versa
-    if distance_from_center <= marker_1:
-        reward1 = 1.0
-    elif distance_from_center <= marker_2:
-        reward1 = 0.6
-    elif distance_from_center <= marker_3:
-        reward2 = 0.2
-    else:
-        reward1 = 0.001
 
-    
+    track_width = params['track_width']
 
-    #reward in angle
-    # Read input variables
-
-    waypoints = params['waypoints']
-
-    closest_waypoints = params['closest_waypoints']
-
-    heading = params['heading']
-
- 
-
-    # Initialize the reward with typical value
-
-    reward2 = 0
-
-    # Calculate the direction of the center line based 
-
-    next_point = waypoints[closest_waypoints[1]]
-
-    prev_point = waypoints[closest_waypoints[0]]
-
-    # Calculate the direction in radius, arctan2(dy, dx), 
-
-    track_direction = math.atan2(next_point[1] - prev_point[1], next_point[0] - prev_point[0])
-
-    # Convert to degree
-
-    track_direction = math.degrees(track_direction)
-
-    # Calculate the difference between the track direction and the heading direction of the car
-
-    direction_diff = abs(track_direction - heading)
-
-    if direction_diff > 180:
-
-        direction_diff = 360 - direction_diff
-
-    # Penalize the reward if the difference is too large
-
-    DIRECTION_THRESHOLD = 10.0
-
-    if direction_diff > 20:
-        reward2 = -0.8 
-    elif direction_diff > 10:
-        reward2 = -0.5
-    elif direction_diff > 5:
-        reward2 = -0.3
+  
 
     all_wheels_on_track = params['all_wheels_on_track']
-    reward3=-1.0
-    if all_wheels_on_track:
-        reward3=1.0
 
-    reward = 2*(reward1)+reward2+reward3
+    speed = params['speed']
 
+    SPEED_THRESHOLD = 1
 
-    
+ 
+
+    # Calculate 5 marks father away from the center line
+
+    marker_1 = 0.1 * track_width
+
+    marker_2 = 0.20 * track_width
+
+    marker_3 = 0.30 * track_width
+
+    marker_4 = 0.40 * track_width
+
+    marker_5 = 0.5 * track_width
+
+ 
+
+    # Give higher reward if the car is closer to center line 
+
+    if distance_from_center <= marker_1 and all_wheels_on_track:
+
+        reward = 3.0
+
+    elif distance_from_center <= marker_2 and all_wheels_on_track:
+
+        reward = 2.5
+
+    elif distance_from_center <= marker_3 and all_wheels_on_track:
+
+        reward = 1.5
+
+    elif distance_from_center <= marker_4 and all_wheels_on_track:
+
+        reward = 1
+
+    elif distance_from_center <= marker_5 and all_wheels_on_track:
+
+        reward = 0.5
+
+    else:
+
+        reward = 1e-3  # likely crashed/ close to off track
+
    
 
-    
 
-    return float(reward)
+    if speed < SPEED_THRESHOLD:
 
+        # Penalize if the car goes too slow
+
+        reward = reward + 0.5
+
+    else:
+
+        # High reward if the car stays on track and goes fast
+
+        reward = reward + 1.0
+
+   
+
+    return float(reward)      

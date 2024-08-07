@@ -5,7 +5,7 @@
       "low": -30.0
     },
     "speed": {
-      "high": 2.0,
+      "high": 4.0,
       "low": 1
     }
   },
@@ -14,6 +14,6 @@
   ],
   "neural_network": "DEEP_CONVOLUTIONAL_NETWORK_SHALLOW",
   "version": "5",
-  "training_algorithm": "sac",
+  "training_algorithm": "clipped_ppo",
   "action_space_type": "continuous"
 }
