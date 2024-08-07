@@ -1,4 +1,4 @@
-def reward_function(params)
+def reward_function(params):
 
 
     
