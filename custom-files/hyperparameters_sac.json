@@ -1,0 +1,12 @@
+{
+  "batch_size": 128,
+  "discount_factor": 0.995,
+  "e_greedy_value": 0.05,
+  "epsilon_steps": 10000,
+  "exploration_type": "additive_noise",
+  "loss_type": "huber",
+  "lr": 0.0008,
+  "num_episodes_between_training": 20,
+  "sac_alpha": 0.2,
+  "num_epoch":10
+}
