@@ -46,7 +46,7 @@ def reward_function(params):
     if direction_diff < 5 and speed > 3:
         reward *= 1.2
 
-    if steering>5 and speed > 3.5 - (0.4 * steering):
+    if not( steering==0 and direction_diff==0) and speed > 3.5 - (0.4 * steering):
         reward *= 0.8
     
     return float(reward)
