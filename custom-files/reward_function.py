@@ -292,7 +292,7 @@ def reward_function(params):
 
             else:
                 if  is_left:
-                   if dist > 6:
+                    if dist > 6:
                         if distance_from_center <= 0.15 * track_width:
                             reward *= 1.2
                         elif distance_from_center <= 0.3 * track_width:
