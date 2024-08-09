@@ -178,9 +178,9 @@ def is_turn_upcoming(closest_waypoints, waypoints, turn_radius_threshold=5.0):
         return False, None
     
     # Get the current position
-    p1 = waypoints[closest_waypoints[1]]
-    p2 = waypoints[(closest_waypoints[1]+1)%len(waypoints)]  # Next waypoint
-    p3 = waypoints[(closest_waypoints[1]+2)%len(waypoints)] # Waypoint after next
+    p1 = waypoints[(closest_waypoints[1]+2)%len(waypoints)]
+    p2 = waypoints[(closest_waypoints[1]+3)%len(waypoints)]  # Next waypoint
+    p3 = waypoints[(closest_waypoints[1]+4)%len(waypoints)] # Waypoint after next
     
     # Calculate turn radius
     turn_radius = calculate_turn_radius(p1, p2, p3)
@@ -257,7 +257,7 @@ def reward_function(params):
                 elif distance_from_center <= marker_2:
                     reward *= 0.9
                 elif distance_from_center <= marker_3:
-                    reward *= 1.1
+                    reward *= 1.2
                 else:
                     reward = 1e-3
             else:
@@ -269,7 +269,7 @@ def reward_function(params):
                 elif distance_from_center <= marker_2:
                     reward *= 0.9
                 elif distance_from_center <= marker_3:
-                    reward *= 1.1
+                    reward *= 1.2
                 else:
                     reward = 1e-3
             else:
@@ -284,7 +284,7 @@ def reward_function(params):
                     elif distance_from_center <= marker_2:
                         reward *= 0.9
                     elif distance_from_center <= marker_3:
-                        reward *= 1.1
+                        reward *= 1.3
                     else:
                         reward = 1e-3
                 else:
@@ -297,7 +297,7 @@ def reward_function(params):
                     elif distance_from_center <= marker_2:
                         reward *= 0.9
                     elif distance_from_center <= marker_3:
-                        reward *= 1.1
+                        reward *= 1.3
                     else:
                         reward = 1e-3
                 else:
