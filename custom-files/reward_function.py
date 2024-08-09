@@ -277,7 +277,7 @@ def reward_function(params):
                             reward *= 0.9
                         else:
                             reward = 1e-3
-                    else
+                    else:
                         if distance_from_center <= 0.15 * track_width:
                             reward *= 0.5
                         elif distance_from_center <= 0.3 * track_width:
